@@ -1,3 +1,16 @@
+<script lang="ts">
+	import { page } from '$app/state';
+	const navPages = [
+		{
+			name: 'Home',
+			url: '/',
+		},
+		{
+			name: 'Posts',
+			url: '/posts',
+		},
+	];
+</script>
 <nav class="bg-gray-800">
 	<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 		<div class="relative flex h-16 items-center justify-between">
@@ -60,16 +73,14 @@
 				<div class="hidden sm:ml-6 sm:block">
 					<div class="flex space-x-4">
 						<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-						<a
-							href="/"
-							class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
-							aria-current="page">Home</a
-						>
-						<a
-							href="/posts"
-							class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-							>Posts</a
-						>
+						{#each navPages as navPage}
+							<a
+								href="{navPage.url}"
+								class="rounded-md px-3 py-2 text-sm font-medium text-white"
+								class:bg-gray-900={page.url.pathname === navPage.url}
+								aria-current={page.url.pathname === navPage.url}>{navPage.name}</a
+							>
+						{/each}
 					</div>
 				</div>
 			</div>
